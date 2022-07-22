@@ -1,3 +1,3 @@
 # SampleLoginPage
 
-Sample login page using Node.JS and MongoJS (MongoDB)
+Sample login page using Node.JS, Express.JS and MongoJS (MongoDB)

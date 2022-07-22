@@ -8,7 +8,6 @@ var errorHandler = require('errorhandler');
 var multer = require('multer');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
-
 var mongojs = require('mongojs');
 
 var app = express();
