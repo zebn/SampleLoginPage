@@ -71,7 +71,7 @@ app.post('/auth', function(req, res) {
 });
 
 app.get('/home', function(req, res) {
-  if (req.session.user) {
+  if (req.session.loggedin) {
     res.send('Welcome back, ' + JSON.stringify(req.session.user) + '!');
   } else {
     res.send('Please login to view this page!');
