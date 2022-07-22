@@ -6,8 +6,8 @@ var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var multer = require('multer');
- var logger = require('morgan');
- var favicon = require('serve-favicon');
+var logger = require('morgan');
+var favicon = require('serve-favicon');
 
 var mongojs = require('mongojs');
 
@@ -49,12 +49,15 @@ app.get('/', function(req, res) {
 
 app.post('/auth', function(req, res) {
   let username = req.body.username;
-  if (username) {
+  let password = req.body.password;
+  if (username && password) {
     db.things.findOne({
-      "username": username
+      "username": username,
+      "password": password
     }, function(err, result) {
       if (err || !result) console.log("No users found");
       if (result) {
+        req.session.loggedin = true;
         req.session.user = result.username;
         res.redirect('/home');
       } else {
@@ -73,7 +76,6 @@ app.get('/home', function(req, res) {
     res.send('Welcome back, ' + JSON.stringify(req.session.user) + '!');
   } else {
     res.send('Please login to view this page!');
-    res.sendfile(path.join(__dirname + '/login.html'));
   }
   res.end();
 });
